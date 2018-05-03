@@ -9,13 +9,13 @@ exports.add_to_cart= function (req,res) {
          Cart.findById(cart_id,function (err,cart) {
              let cartProducts = cart.products;
              let checker =0;
-             let hasUpdated =false;
              let newProduct= new Product({
                 productName:product.productName,
                 productStock:product.productStock,
                 productPrice:product.productPrice,
                 quantity:quantity
              });
+             console.log(newProduct);
              if (cartProducts.length === 0) {
                  Cart.findByIdAndUpdate(cart_id, {
                      $push: {
@@ -54,7 +54,7 @@ exports.add_to_cart= function (req,res) {
                      if(checker===cartProducts.length){
                          Cart.findByIdAndUpdate(cart_id, {
                              $push: {
-                                 products: product
+                                 products: newProduct
                              }
                          }, {new: true}, function (err, doc) {
                              if (err)
@@ -82,4 +82,17 @@ exports.get_all_cart= function (req,res) {
     });
 };
 
-
+exports.delete_item= function (req,res) {
+    let cart_id= req.body.cart_id;
+    let product_id= req.body.product_id;
+   Cart.findByIdAndUpdate(cart_id,{
+       $pull:{
+           products:{_id:product_id}
+       }
+   },function (err) {
+       if(err)
+           res.send({res:err});
+       else
+           res.send({res:true});
+   });
+};
