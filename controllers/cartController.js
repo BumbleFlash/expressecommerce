@@ -10,6 +10,7 @@ exports.add_to_cart= function (req,res) {
              let cartProducts = cart.products;
              let checker =0;
              let newProduct= new Product({
+                 _id:product.id,
                 productName:product.productName,
                 productStock:product.productStock,
                 productPrice:product.productPrice,

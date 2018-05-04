@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const _ = require('lodash');
 let productSchema= new Schema({
    productName: String,
-   productQuantity: Number,
+   productStock: Number,
    productPrice: Number,
    quantity: {
        type:Number,
@@ -15,7 +15,7 @@ let productSchema= new Schema({
 productSchema.methods.toJSON = function() {
     let product = this;
     let productObject = product.toObject();
-    return _.pick(productObject, ['_id', 'productName', 'productStock','productPrice','quantity']);
+    return _.pick(productObject, ['_id', 'productName', 'productStock','productPrice']);
 };
 
 let Product = mongoose.model('Product', productSchema);
