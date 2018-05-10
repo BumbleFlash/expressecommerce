@@ -93,6 +93,23 @@ exports.get_all_cart= function (req,res) {
     });
 };
 
+exports.update_cart=function (req,res) {
+    let cart_id= req.body.cart_id;
+    let quantity= req.body.quantity;
+    let product_id=req.body.product_id;
+    Cart.findOneAndUpdate({"_id":cart_id,"products._id":product_id},
+        {"$set":{
+              "products.$.quantity":quantity
+            }
+
+        },{new:true},function (err,doc) {
+           if(err)
+              res.send({res:false});
+           else
+               res.send({res:true,doc});
+        });
+
+};
 exports.delete_item= function (req,res) {
     let cart_id= req.body.cart_id;
     let product_id= req.body.product_id;

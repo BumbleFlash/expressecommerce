@@ -8,4 +8,6 @@ router.get('/getCarts', cartController.get_all_cart);
 
 router.delete('/deleteCart',cartController.delete_item);
 
+router.put('/updateCart',cartController.update_cart);
+
 module.exports = router;
