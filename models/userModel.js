@@ -42,7 +42,7 @@ let userSchema = new Schema({
         }
     }],
     cart_id:{type: Schema.Types.ObjectId, ref: 'User'}
-},{ usePushEach: true });
+});
 
 userSchema.methods.toJSON = function() {
     let user = this;

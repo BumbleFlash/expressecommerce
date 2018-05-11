@@ -10,4 +10,8 @@ router.delete('/deleteCart',cartController.delete_item);
 
 router.put('/updateCart',cartController.update_cart);
 
+router.get('/orders/:id', cartController.get_all_orders);
+
+router.patch('/orders', cartController.update_order_status);
+
 module.exports = router;

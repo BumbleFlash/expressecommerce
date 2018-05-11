@@ -10,13 +10,13 @@ let productSchema= new Schema({
    quantity: {
        type:Number,
        default:1
-   }
-});
-productSchema.methods.toJSON = function() {
-    let product = this;
-    let productObject = product.toObject();
-    return _.pick(productObject, ['_id', 'productName', 'productStock','productPrice']);
-};
+   },
+}, {strict:false});
+// productSchema.methods.toJSON = function() {
+//     let product = this;
+//     let productObject = product.toObject();
+//     return _.pick(productObject, ['_id', 'productName', 'productStock','productPrice']);
+// };
 
 let Product = mongoose.model('Product', productSchema);
 
